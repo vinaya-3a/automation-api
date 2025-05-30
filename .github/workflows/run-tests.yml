@@ -21,8 +21,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      - name: Run Test Harness
+      - name: Run TestHarness via Maven Exec
         run: |
-          java -cp target/automation-test-0.0.1-SNAPSHOT.jar com.example.TestHarness
-        env:
-          TEST_CASE: ${{ github.event.action }}
+            mvn exec:java \
+              -Dexec.mainClass=com.example.TestHarness \
+              -Dexec.cleanupDaemonThreads=false \
+              -DTEST_CASE=${{ github.event.action }}
+
