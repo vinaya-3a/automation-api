@@ -18,8 +18,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'  # ✅ Required
 
-      - name: Run specific test using TestHarness
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Run Test Harness
+        run: |
+          java -cp target/automation-test-0.0.1-SNAPSHOT.jar com.example.TestHarness
         env:
           TEST_CASE: ${{ github.event.action }}
-        run: |
-          mvn clean compile exec:java -Dexec.mainClass="com.example.TestHarness"
