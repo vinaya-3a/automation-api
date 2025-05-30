@@ -12,10 +12,11 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Set up Java
+    - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
+        distribution: 'temurin'  # ✅ Required
 
     - name: Set test case environment
       run: echo "TEST_CASE=${{ github.event.action }}" >> $GITHUB_ENV
