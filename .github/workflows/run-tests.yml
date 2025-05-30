@@ -18,13 +18,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'  # ✅ Required
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build Fat JAR
+        run: mvn clean package
 
-      - name: Run TestHarness via Maven Exec
+      - name: Run TestHarness from Fat JAR
         run: |
-            mvn exec:java \
-              -Dexec.mainClass=com.example.TestHarness \
-              -Dexec.cleanupDaemonThreads=false \
-              -DTEST_CASE=${{ github.event.action }}
+            java -jar target/test-runner-0.0.1-SNAPSHOT-shaded.jar
+        env:
+            TEST_CASE: ${{ github.event.action }}
+
 
