@@ -10,7 +10,6 @@
 	</properties>
 	<build>
 		<plugins>
-			<!-- Shade plugin to create fat jar -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -22,10 +21,11 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.example.TestHarness</mainClass>
+									<mainClass>com.testautomation.TestHarness</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>

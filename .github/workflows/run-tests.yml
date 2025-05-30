@@ -18,12 +18,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'  # ✅ Required
 
-      - name: Build Fat JAR
+      - name: Build with Maven
         run: mvn clean package
 
-      - name: Run TestHarness from Fat JAR
-        run: |
-            java -jar target/test-runner-0.0.1-SNAPSHOT-shaded.jar
+
+      - name: Run test case
+        run: java -jar target/test-runner-0.0.1-SNAPSHOT-shaded.jar
         env:
             TEST_CASE: ${{ github.event.action }}
 
