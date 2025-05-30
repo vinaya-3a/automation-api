@@ -1,26 +1,25 @@
-name: Run Automation Test
+name: Run TestHarness Based on Input
 
 on:
   repository_dispatch:
-    types: [tc001, tc002, tc003, run-all]
+    types: [tc001, tc002, tc003]
 
 jobs:
-  run-tests:
+  run-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'  # ✅ Required
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'  # ✅ Required
 
-    - name: Set test case environment
-      run: echo "TEST_CASE=${{ github.event.action }}" >> $GITHUB_ENV
-
-    - name: Build and Run Test
-      run: |
-        mvn clean compile exec:java -Dexec.mainClass="com.example.TestHarness"
+      - name: Run specific test using TestHarness
+        env:
+          TEST_CASE: ${{ github.event.action }}
+        run: |
+          mvn clean compile exec:java -Dexec.mainClass="com.example.TestHarness"
