@@ -23,4 +23,4 @@ jobs:
 
     - name: Build and Run Test
       run: |
-        mvn clean compile exec:java -Dexec.mainClass="com.testautomation.TestHarness"
+        mvn clean compile exec:java -Dexec.mainClass="com.example.TestHarness"
